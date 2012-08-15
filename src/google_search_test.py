@@ -4,7 +4,7 @@ Created on 2012-8-6
 @author: Administrator
 '''
 import mechanize
-import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 BASE_URL = "http://www.packtpub.com/article-network"
 br = mechanize.Browser()
 data = br.open(BASE_URL).get_data()
@@ -13,7 +13,7 @@ def scrape_links(base_url,data):
     soup = BeautifulSoup(data)
     #
     #
-    links = [mechanize.Link(base_url=base_url,url=str(anchor["href"]),text=str(anchor.string),tag=str(anchor.name),attrs=[(str(name),str(value)) for name,value in anchor.attrs]) for anchor in soup.right.findAll("a")]
+    links = [mechanize.Link(base_url = base_url,url = str(anchor['href']),text = str(anchor.string),tag = str(anchor.name),attrs = [(str(name), str(value)) for name, value in anchor.attrs]) for anchor in soup.right.findAll("a")]
     return links
 def scrape_articles(data):
     '''Scrape the title and url of all the articles in this page'''
