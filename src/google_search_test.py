@@ -13,6 +13,11 @@ def scrape_links(base_url,data):
     soup = BeautifulSoup(data)
     #
     #
+#    links = []
+#    for anchor in soup.right.findAll("a"):
+#        tmpAttrs =[(str(name), str(value)) for name, value in anchor.attrs]
+#        tmpLink = mechanize.Link(base_url = base_url,url = str(anchor['href']),text = str(anchor.string),tag = str(anchor.name),attrs = tmpAttrs)
+#        links.append(tmpLink)
     links = [mechanize.Link(base_url = base_url,url = str(anchor['href']),text = str(anchor.string),tag = str(anchor.name),attrs = [(str(name), str(value)) for name, value in anchor.attrs]) for anchor in soup.right.findAll("a")]
     return links
 def scrape_articles(data):
